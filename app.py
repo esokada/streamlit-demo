@@ -43,6 +43,8 @@ if "consent_check" not in st.session_state:
     st.session_state.consent_check = False
 if "not_eligible" not in st.session_state:
     st.session_state.not_eligible = False
+if "accepted_nickname" not in st.session_state:
+    st.session_state.accepted_nickname = None
 
 if st.session_state.over_max is True:
     st.write(
@@ -137,6 +139,7 @@ def login_callback():
             st.session_state.over_max = True
         else:
             st.session_state.login = True
+            st.session_state.accepted_nickname = st.session_state.existing_nickname
     # if not present, tell the user they misspelled their nickname
     # (or they are a new user) and return them to landing page
     else:
@@ -156,7 +159,9 @@ def nickname_callback():
         # write user to user sheet
         # TRUE is fine here because they have to have checked the consent box to get here
         sh_3.append_row([st.session_state.new_nickname, "TRUE", 0])
+        st.session_state.not_eligible = False
         st.session_state.login = True
+        st.session_state.accepted_nickname = st.session_state.new_nickname
 
 
 if st.session_state.login:
@@ -169,6 +174,7 @@ if st.session_state.login:
             if st.session_state.num_transcripts >= transcript_max:
                 st.session_state.over_max = True
                 st.session_state.login = False
+            st.session_state.name_cell = sh_3.find(st.session_state.accepted_nickname)
             sh_3.update_cell(
                 st.session_state.name_cell.row, 3, st.session_state.num_transcripts
             )
@@ -240,6 +246,7 @@ elif st.session_state.demo_survey:
         st.radio(
             "Do you identify as transgender or cisgender?",
             ("Transgender", "Cisgender", "Prefer not to answer", "Something else"),
+            index=None,
             key="trans",
         )
         st.text_input("Something else", key="trans_2")
@@ -259,6 +266,7 @@ elif st.session_state.demo_survey:
         st.radio(
             "Did you spend most of your childhood in the US, or in another country?",
             ("In the US", "In another country"),
+            index=None,
             key="US",
         )
         st.write("Which best describes your sexual orientation? Choose all that apply.")
@@ -287,6 +295,7 @@ elif st.session_state.demo_survey:
                 "85+",
                 "Prefer not to answer",
             ),
+            index=None,
             key="age",
         )
         st.radio(
@@ -302,11 +311,13 @@ elif st.session_state.demo_survey:
                 "Doctorate (PhD, EdD)",
                 "Prefer not to answer",
             ),
+            index=None,
             key="education",
         )
         st.radio(
             "Do you use “generative AI” chatbots? (Examples include ChatGPT, Bard, and Bing Chat)",
             ("Yes", "No"),
+            index=None,
             key="use_chatbots",
         )
         st.write(
@@ -315,6 +326,7 @@ elif st.session_state.demo_survey:
         st.radio(
             "Do you work or study in natural language processing, computational linguistics, machine learning, artificial intelligence, or computer science?",
             ("Yes", "No"),
+            index=None,
             key="related_fields",
         )
         st.write(
@@ -331,6 +343,7 @@ elif st.session_state.demo_survey:
                 "6 Usually",
                 "7 Always",
             ),
+            index=None,
             key="factual",
         )
         st.radio(
@@ -344,6 +357,7 @@ elif st.session_state.demo_survey:
                 "6 Helpful",
                 "7 Very helpful",
             ),
+            index=None,
             key="helpful",
         )
         st.text_area(
@@ -357,6 +371,7 @@ elif st.session_state.demo_survey:
         st.radio(
             "What level of computer user do you consider yourself?",
             ("Beginning", "Intermediate", "Advanced"),
+            index=None,
             key="computer",
         )
         st.text_input("Something else", key="computer_2")

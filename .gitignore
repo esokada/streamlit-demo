@@ -1,3 +1,5 @@
 .streamlit/
 .vscode/
 feature_list.txt
+session_state.txt
+tests_errors.txt

@@ -110,7 +110,6 @@ def demo_callback():
             st.session_state.orientation_12,
             st.session_state.age,
             st.session_state.education,
-            st.session_state.orientation_1,
             st.session_state.use_chatbots,
             st.session_state.related_fields,
             st.session_state.factual,

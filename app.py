@@ -21,9 +21,14 @@ credentials = Credentials.from_service_account_info(
     scopes=scopes,
 )
 client = gspread.authorize(credentials)
-sh_1 = client.open("common_ground_demo").worksheet("Sheet1")
-sh_2 = client.open("chat_transcripts").worksheet("Sheet1")
-sh_3 = client.open("common_ground_users").worksheet("Sheet1")
+sh_1 = client.open("cg_demo").worksheet("Sheet1")
+sh_2 = client.open("cg_transcripts").worksheet("Sheet1")
+sh_3 = client.open("cg_users").worksheet("Sheet1")
+
+# for testing
+# sh_1 = client.open("common_ground_demo").worksheet("Sheet1")
+# sh_2 = client.open("chat_transcripts").worksheet("Sheet1")
+# sh_3 = client.open("common_ground_users").worksheet("Sheet1")
 
 transcript_max = 20
 

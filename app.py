@@ -6,7 +6,7 @@ from google.oauth2.service_account import Credentials
 import consent_text
 
 st.write("#")
-st.title("Common Ground demo")
+st.title("Linguistics of AI Chatbots")
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -391,7 +391,6 @@ elif st.session_state.demo_survey:
 
 
 else:
-    st.header("Landing page")
     st.write("Existing users, enter your unique nickname to begin chatting!")
     with st.form("existing_user"):
         st.text_input("Enter nickname", key="existing_nickname")

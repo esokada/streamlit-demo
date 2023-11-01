@@ -21,6 +21,8 @@ credentials = Credentials.from_service_account_info(
     scopes=scopes,
 )
 client = gspread.authorize(credentials)
+
+# for prod
 sh_1 = client.open("cg_demo").worksheet("Sheet1")
 sh_2 = client.open("cg_transcripts").worksheet("Sheet1")
 sh_3 = client.open("cg_users").worksheet("Sheet1")
@@ -184,10 +186,13 @@ if st.session_state.login:
             )
             del st.session_state["messages"]
         st.write(
-            "This will submit your chat transcript to the researcher and restart your chat"
+            "Please press 'Submit transcript' to send your chat transcript to the researcher! This will restart your chat."
         )
 
     # TODO: add note saying they may experience errors and to try again later
+    st.write(
+        "Please press 'Submit transcript' at left to to send your chat transcript to the researcher! This will restart your chat."
+    )
     if "openai_model" not in st.session_state:
         st.session_state["openai_model"] = "gpt-3.5-turbo"
 

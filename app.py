@@ -191,7 +191,7 @@ if st.session_state.login:
 
     # TODO: add note saying they may experience errors and to try again later
     st.write(
-        "Please press 'Submit transcript' at left to to send your chat transcript to the researcher! This will restart your chat."
+        "First, chat with the chatbot below! When you're done chatting, press 'Submit transcript' in the left sidebar (you may have to expand the sidebar on mobile) to send your transcript to the researcher! This will restart your chat."
     )
     if "openai_model" not in st.session_state:
         st.session_state["openai_model"] = "gpt-3.5-turbo"

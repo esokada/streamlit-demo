@@ -191,7 +191,7 @@ if st.session_state.login:
 
     # TODO: add note saying they may experience errors and to try again later
     st.write(
-        "First, chat with the chatbot below! When you're done chatting, press 'Submit transcript' in the left sidebar (tap the left >> on mobile) to send your transcript to the researcher. This will restart your chat."
+        "First, chat with the chatbot below! When you're done, press 'Submit transcript' at left (on mobile, tap the '>' arrow at upper left) to send your transcript to the researcher and restart your chat."
     )
     if "openai_model" not in st.session_state:
         st.session_state["openai_model"] = "gpt-3.5-turbo"
@@ -233,7 +233,7 @@ elif st.session_state.create_nickname:
     with st.form("nickname_form"):
         # add more explanation here?
         st.write(
-            "Next, choose a unique nickname. Next time you visit, log in with this nickname to start chatting! You won't have to fill in the survey again."
+            "Choose a unique nickname to start chatting! Log in with this nickname next time to chat without filling in the survey again."
         )
         st.text_input("Choose a unique nickname", key="new_nickname")
         nickname_form = st.form_submit_button(

@@ -171,8 +171,16 @@ def nickname_callback():
 
 
 if st.session_state.login:
+    # TODO: add note saying they may experience errors and to try again later
+    st.write(
+        ":blue[Mobile users: touch the >> arrow at upper left to see instructions and submit your chat]"
+    )
+    st.write(
+        ":blue[If you experience errors, please try again in a moment. Contact the researcher at esokada@uw.edu to report any issues]"
+    )
     with st.sidebar:
-        if st.button("Submit transcript"):
+        if st.button("Submit"):
+            st.balloons()
             sh_2.append_row([str(st.session_state.messages)], table_range="A1:A1")
             # increment num_transcripts
             st.session_state.num_transcripts += 1
@@ -185,14 +193,19 @@ if st.session_state.login:
                 st.session_state.name_cell.row, 3, st.session_state.num_transcripts
             )
             del st.session_state["messages"]
+            st.toast("Thanks for sharing your chat transcript!")
+        st.write("How it works:")
+        st.write("1. Chat with the chatbot!")
         st.write(
-            "Press 'Submit transcript' to send your chat transcript to the researcher and restart your chat"
+            "2. When you're done, press the Submit button above to send your chat transcript to the researcher."
+        )
+        st.write(
+            "3. Repeat as many times as you like! The more conversations, the merrier. :blush:"
+        )
+        st.write(
+            "4. Bookmark this page and log back in again with your nickname anytime to chat."
         )
 
-    # TODO: add note saying they may experience errors and to try again later
-    st.write(
-        "First, chat with the chatbot below! When you're done, press 'Submit transcript' at left (on mobile, tap the '>' arrow at upper left) to send your transcript to the researcher and restart your chat."
-    )
     if "openai_model" not in st.session_state:
         st.session_state["openai_model"] = "gpt-3.5-turbo"
 
@@ -233,7 +246,7 @@ elif st.session_state.create_nickname:
     with st.form("nickname_form"):
         # add more explanation here?
         st.write(
-            "Choose a unique nickname to start chatting! Log in with this nickname next time to chat without filling in the survey again."
+            "Choose a unique nickname to start chatting! You can use this nickname to come back anytime and chat without having to fill in the survey again."
         )
         st.text_input("Choose a unique nickname", key="new_nickname")
         nickname_form = st.form_submit_button(
@@ -398,17 +411,16 @@ elif st.session_state.demo_survey:
 
 
 else:
-    st.write("Existing users, enter your unique nickname to begin chatting!")
+    st.write("**Existing users**, enter your unique nickname to begin chatting!")
     with st.form("existing_user"):
         st.text_input("Enter nickname", key="existing_nickname")
         login = st.form_submit_button("Log in", on_click=login_callback)
     st.write(
-        "New users, please fill out the consent form and demographic survey below before participating."
+        "**New users**, please fill out the consent form and demographic survey below before participating."
     )
     with st.form("consent_form"):
         st.header("Consent Form")
         st.subheader(consent_text.title)
-        st.write(consent_text.header_1)
         st.write(consent_text.subtitle)
         st.write(consent_text.text_1)
         st.write(consent_text.text_2)

@@ -1,5 +1,5 @@
 title = "Information About A UW Research Study"
-subtitle = "Donate your “generative AI” chat transcripts to science!"
+subtitle = "**Donate your “generative AI” chat transcripts to science!**"
 
 header_1 = "What is this study about?"
 

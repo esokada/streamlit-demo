@@ -194,6 +194,9 @@ if st.session_state.login:
             )
             del st.session_state["messages"]
             st.toast("Thanks for sharing your chat transcript!")
+            st.markdown(
+                "**For SurveyCircle users (www.surveycircle.com): The Survey Code is: K5MQ-4X8H-WZX6-9HHX**"
+            )
         st.write("How it works:")
         st.write("1. Chat with the chatbot!")
         st.write(
@@ -204,6 +207,9 @@ if st.session_state.login:
         )
         st.write(
             "4. Bookmark this page and log back in again with your nickname anytime to chat."
+        )
+        st.write(
+            "**For SurveyCircle users: the code will appear after you submit a chat transcript**"
         )
 
     if "openai_model" not in st.session_state:
